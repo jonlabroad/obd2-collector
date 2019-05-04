@@ -20,8 +20,8 @@ def poll():
                         data = obdClient.query(connection, cmdName)
                         setLastPolledTime(cmdName)
                         allData[cmdName] = data
-                except:
-                    print("ERROR")
+                except Exception,e:
+                    print(e)
             print('************************')
             fileCache.writeData(allData)
         else:
