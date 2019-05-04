@@ -1,7 +1,8 @@
 import json
+import logging
 
 def readCommandInfo():
     with open("commands.json") as commandsFile:
         cmds = json.load(commandsFile)
-        print(cmds)
+        logging.info(cmds)
         return cmds

@@ -23,14 +23,12 @@ def updateFile():
     return currentFile
 
 def writeData(data):
-    print(data)
     t = jdlDate.getCalendarDateTime()
     dataToWrite = {}
     dataToWrite['timestamp'] = t
 
     dataObject = {}
     for attr, value in data.items():
-        print(type(value.value))
         dataObject[attr] = {}
         if isinstance(value.value, str):
             dataObject[attr]['value'] = value.value

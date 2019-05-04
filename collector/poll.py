@@ -3,6 +3,7 @@ import jdlDate
 import obdClient
 import commands
 import fileCache
+import logging
 
 allCommandsToPoll = {}
 lastPolled = {}
@@ -21,19 +22,18 @@ def poll():
                 fileCache.updateFile()
                 try:
                     if isTimeToPoll(cmdName):
-                        print("Polling " + cmdName)
+                        logging.debug("Polling " + cmdName)
                         data = obdClient.query(connection, cmdName)
                         setLastPolledTime(cmdName, lastPolled)
                         allData[cmdName] = data
                     else:
-                        print("Not time to poll " + cmdName)
-                except Exception as e:
-                    print("ERROR!")
-                    print(str(e))
-            print('************************')
+                        logging.info("Not time to poll " + cmdName)
+                except Exception:
+                    logging.exception("ERROR!")
+
             fileCache.writeData(allData)
         else:
-            print("Connection failure... retrying")
+            logging.warning("Connection failure... retrying")
             time.sleep(5)
             connection = connect
 
@@ -44,11 +44,7 @@ def connect():
 
 def isTimeToPoll(cmdName):
     command = allCommandsToPoll['commands'][cmdName]
-    print(str(command))
     lastPolledTime = lastPolled[cmdName]
-    print(str(lastPolledTime))
-    print("Command: " + str(command))
-    print("LastPolledTime: " + str(lastPolledTime))
     return jdlDate.getUtc(jdlDate.getLocalTime()) - lastPolledTime > command['pollIntervalSec']
 
 def setLastPolledTime(cmdName, lastPolled):
