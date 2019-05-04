@@ -1,3 +1,5 @@
+import json
+
 import obd
 
 def connect():
@@ -13,24 +15,25 @@ def connect():
 
 def supported_commands(connection):
     cmds = connection.supported_commands
-    print('Supported commands: ' + cmds)
+    #print('Supported commands: ')
+    #for cmd in cmds:
+    #    print(cmd.name + ": " + cmd.desc)
     return cmds
 
 def query(connection, command):
-    print("Querying [" + command + "]...")
+    #print("Querying [" + command.name + "]...")
     response = connection.query(command)
-    print("[" + command + "] response:" + response)
+    #print("[" + command.name + "] response:" + str(response.value))
     return response
 
-def pollAll(connection):
+def pollAll(connection, cmds):
     response = {}
-    allCmds = supported_commands(connection)
-    for cmd in allCmds:
+    for cmd in cmds:
         cmdResponse = query(connection, cmd)
         if not cmdResponse.is_null():
-            response[cmd] = cmdResponse
-        else:
-            print("Received NULL response from command [" + cmd + "]")
+            response[cmd.name] = cmdResponse
+#        else:
+#            print("Received NULL response from command [" + cmd.name + "]")
 
     return response
 
