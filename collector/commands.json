@@ -1,0 +1,29 @@
+{
+    "commands": {
+        "ENGINE_LOAD": { "pollIntervalSec": 0 },
+        "ABSOLUTE_LOAD": { "pollIntervalSec": 0 },
+        "THROTTLE_POS": { "pollIntervalSec": 0 },
+        "RELATIVE_THROTTLE_POS": { "pollIntervalSec": 0 },
+        "THROTTLE_ACTUATOR": { "pollIntervalSec": 0 },
+        "THROTTLE_POS_B": { "pollIntervalSec": 0 },
+        "ACCELERATOR_POS_E": { "pollIntervalSec": 0 },
+        "ACCELERATOR_POS_D": { "pollIntervalSec": 0 },
+        "FUEL_LEVEL": { "pollIntervalSec": 0 },
+        "SPEED": { "pollIntervalSec": 0 },
+        "CATALYST_TEMP_B1S1": { "pollIntervalSec": 0 },
+        "AMBIANT_AIR_TEMP": { "pollIntervalSec": 30 },
+        "AIR_STATUS": { "pollIntervalSec": 30 },
+        "INTAKE_PRESSURE": { "pollIntervalSec": 0 },
+        "TIMING_ADVANCE": { "pollIntervalSec": 0 },
+        "RPM": { "pollIntervalSec": 0 },
+        "COMMANDED_EQUIV_RATIO": { "pollIntervalSec": 0 },
+        "O2_S1_WR_CURRENT": { "pollIntervalSec": 0 },
+        "COOLANT_TEMP": { "pollIntervalSec": 10 },
+        "CONTROL_MODULE_VOLTAGE": { "pollIntervalSec": 60 },
+        "O2_B1S2": { "pollIntervalSec": 0 },
+        "EVAPORATIVE_PURGE": { "pollIntervalSec": 10 },
+        "SHORT_FUEL_TRIM_1": { "pollIntervalSec": 0 },
+        "LONG_FUEL_TRIM_1": { "pollIntervalSec": 30 },
+        "BAROMETRIC_PRESSURE": { "pollIntervalSec": 10 }
+    }
+}
