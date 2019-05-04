@@ -1,4 +1,5 @@
 #!/bin/bash
 
 git pull origin master || true
-python3 collector/start.py
+cd collector
+python3 ./start.py
