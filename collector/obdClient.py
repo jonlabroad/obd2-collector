@@ -22,7 +22,7 @@ def supported_commands(connection):
 
 def query(connection, command):
     #print("Querying [" + command.name + "]...")
-    response = connection.query(command)
+    response = connection.query(obd.commands[command])
     #print("[" + command.name + "] response:" + str(response.value))
     return response
 
