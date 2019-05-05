@@ -27,7 +27,7 @@ def poll():
                         setLastPolledTime(cmdName, lastPolled)
                         allData[cmdName] = data
                     else:
-                        logging.info("Not time to poll " + cmdName)
+                        logging.debug("Not time to poll " + cmdName)
                 except Exception:
                     logging.exception("ERROR!")
 
