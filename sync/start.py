@@ -15,7 +15,7 @@ def readFile(filename):
         
     return data
 
-path = 'C:/Users/jonla/Documents/code/odb2-collector/collector/'
+path = '../collector/cache'
 while(True):
     files = [f for f in glob.glob(path + "OBD_*_*.json")]
     print(files)
