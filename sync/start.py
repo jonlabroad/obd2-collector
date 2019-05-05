@@ -26,5 +26,6 @@ while(True):
             os.remove(f)
         except Exception:
             logging.exception('Could complete data write for: ' + f)
+            time.sleep(30)
 
     time.sleep(60)
