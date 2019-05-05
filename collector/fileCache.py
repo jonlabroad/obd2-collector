@@ -6,6 +6,8 @@ currentFile = None
 lastFileOpen = None
 fileIntervalSec = 60
 
+cachePath = './cache'
+
 def updateFile():
     global currentFile
     global lastFileOpen
@@ -45,4 +47,4 @@ def openFile(calendarDateTime):
     return f
 
 def getFilename(calendarDateTime):
-    return "OBD_" + calendarDateTime['calendarDate'] + "_" + calendarDateTime['hourMinSec'] + ".json"
+    return cachePath + "/OBD_" + calendarDateTime['calendarDate'] + "_" + calendarDateTime['hourMinSec'] + ".json"
