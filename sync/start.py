@@ -5,6 +5,7 @@ import glob
 import logging
 
 import dynamoDBClient
+import s3Client
 
 def readFile(filename):
     f = open(filename)
@@ -21,9 +22,7 @@ while(True):
     print(files)
     for f in files:
         try:
-            dataset = readFile(f)
-            dynamoDBClient.writeDataset(dataset)
-            os.remove(f)
+            s3Client.upload(files)
         except Exception:
             logging.exception('Could complete data write for: ' + f)
             time.sleep(30)
