@@ -18,8 +18,8 @@ def poll():
     while(True):
         if (connection.is_connected()):
             allData = {}
+            fileCache.updateFile()
             for cmdName in allCommandsToPoll['commands'].keys():
-                fileCache.updateFile()
                 try:
                     if isTimeToPoll(cmdName):
                         logging.debug("Polling " + cmdName)
