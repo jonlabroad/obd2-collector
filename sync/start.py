@@ -17,7 +17,7 @@ def readFile(filename):
 
 path = '../collector/cache'
 while(True):
-    files = [f for f in glob.glob(path + "OBD_*_*.json")]
+    files = [f for f in glob.glob(path + "/OBD_*_*.json")]
     print(files)
     for f in files:
         try:
