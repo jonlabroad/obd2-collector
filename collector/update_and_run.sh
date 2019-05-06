@@ -1,5 +1,6 @@
 #!/bin/bash
 
+date > date_$RANDOM.txt
 date
 git pull origin master || true
 cd collector
