@@ -32,6 +32,7 @@ def poll():
                     logging.exception("ERROR!")
 
             fileCache.writeData(allData)
+            time.sleep(1)
         else:
             logging.warning("Connection failure... retrying")
             time.sleep(5)
