@@ -1,4 +1,7 @@
 .lineplot-container
 {
-    width: 50%;
+    height: 300px;
+    width: 80%;
+    display: flex;
+    text-align: center;
 }

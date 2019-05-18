@@ -7,13 +7,32 @@ import { PlotDashboardState } from './types';
 import { AnyARecord } from 'dns';
 import { updateData } from './reducers';
 import DashboardContainer from './containers/DashboardContainer';
+import { CssBaseline, MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
 
 const store = createStore<PlotDashboardState, AnyARecord, any, any>(
     updateData,
     undefined
 );
 
-ReactDOM.render(<DashboardContainer />, document.getElementById('root'));
+const theme = createMuiTheme({
+    palette: {
+      primary: red,
+      secondary: {
+        main: '#d32f2f',
+        dark: '#d32f2f',
+      },
+      type: 'dark',
+    },
+  });
+
+ReactDOM.render(
+    <MuiThemeProvider theme={theme}>
+        <CssBaseline>
+            <DashboardContainer />
+        </CssBaseline>
+    </MuiThemeProvider>
+    , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
