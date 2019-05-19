@@ -51,18 +51,16 @@ export default class LinePlotContainer extends React.Component<LinePlotContainer
     }
 
     render() {
+        console.log({render: this.props.fieldName});
         if (!this.props.data) {
             return <div>LOADING</div>;
         }
 
         return (
-            <div className='lineplot-container'>
-                <HighchartsReact
-                    highcharts={Highcharts}
-                    options={this.createOptions()}
-                />
-
-            </div>
+            <HighchartsReact
+                highcharts={Highcharts}
+                options={this.createOptions()}
+            />
         );
     }
 

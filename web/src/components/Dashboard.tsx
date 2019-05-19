@@ -4,13 +4,45 @@ import LinePlotContainer from '../containers/LinePlotContainer';
 import Helmet from 'react-helmet';
 import Grid from '@material-ui/core/Grid';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import Datasets from '../data/Datasets';
+import Enumerable from 'linq';
+import { DataPlot } from '../types';
+import FieldDropdownContainer from '../containers/FieldDropdownContainer';
 
 export interface DashboardProps {
-  testdata: Dataset;
+  datasets: Datasets;
+  plots: DataPlot[];
 }
 
 export default class Dashboard extends React.Component<DashboardProps> { 
+  renderPlots(dataset: Dataset): Array<JSX.Element | null> {
+    return Enumerable.from(this.props.plots).select((plot) => {
+      var firstSeries = Enumerable.from(plot.series).firstOrDefault();
+      if (!firstSeries) {
+        return null;
+      }
+      return (
+        <Grid item xs={12}>
+          <FieldDropdownContainer
+            plotIndex={0}
+          />
+          <LinePlotContainer
+            data={dataset}
+            fieldName={firstSeries.yName}
+          />
+        </Grid>
+      );
+    })
+    .toArray();
+  }
+  
   render() {
+    var datasetEntry = Enumerable.from(this.props.datasets).firstOrDefault();
+    console.log({datasetEntry: datasetEntry});
+    var dataset = datasetEntry ? datasetEntry.value : undefined;
+    if (!dataset) {
+      return null;
+    }
     return (
       <div>
         <Helmet>
@@ -24,24 +56,7 @@ export default class Dashboard extends React.Component<DashboardProps> {
           </Toolbar>
         </AppBar>
         <Grid container spacing={24}>
-          <Grid item xs={12}>
-            <LinePlotContainer
-              data={this.props.testdata}
-              fieldName='SPEED_kph'
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <LinePlotContainer
-              data={this.props.testdata}
-              fieldName='RPM_revolutions_per_minute'
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <LinePlotContainer
-              data={this.props.testdata}
-              fieldName='ABSOLUTE_LOAD_percent'
-            />
-          </Grid>
+          {this.renderPlots(dataset)}
         </Grid>
       </div>
     );

@@ -9,6 +9,7 @@ import { updateData } from './reducers';
 import DashboardContainer from './containers/DashboardContainer';
 import { CssBaseline, MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
+import { Provider } from 'react-redux';
 
 const store = createStore<PlotDashboardState, AnyARecord, any, any>(
     updateData,
@@ -29,7 +30,9 @@ const theme = createMuiTheme({
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
         <CssBaseline>
+          <Provider store={store}>
             <DashboardContainer />
+          </Provider>
         </CssBaseline>
     </MuiThemeProvider>
     , document.getElementById('root'));
