@@ -9,7 +9,9 @@ export interface DataPlot {
     series: Series[];
 }
 
+
 export interface PlotDashboardState {
     datasets: Datasets;
+    calendarDate: string;
     plots: DataPlot[];
 }

@@ -8,6 +8,7 @@ import Datasets from '../data/Datasets';
 import Enumerable from 'linq';
 import { DataPlot } from '../types';
 import FieldDropdownContainer from '../containers/FieldDropdownContainer';
+import CalendarDatePicker from './CalendarDatePicker';
 
 export interface DashboardProps {
   datasets: Datasets;
@@ -16,6 +17,10 @@ export interface DashboardProps {
 
 export default class Dashboard extends React.Component<DashboardProps> { 
   renderPlots(dataset: Dataset): Array<JSX.Element | null> {
+    if (!dataset) {
+      return [];
+    }
+
     return Enumerable.from(this.props.plots).select((plot) => {
       var firstSeries = Enumerable.from(plot.series).firstOrDefault();
       if (!firstSeries) {
@@ -37,12 +42,9 @@ export default class Dashboard extends React.Component<DashboardProps> {
   }
   
   render() {
-    var datasetEntry = Enumerable.from(this.props.datasets).firstOrDefault();
+    var datasetEntry = Enumerable.from(this.props.datasets.data).firstOrDefault();
     console.log({datasetEntry: datasetEntry});
     var dataset = datasetEntry ? datasetEntry.value : undefined;
-    if (!dataset) {
-      return null;
-    }
     return (
       <div>
         <Helmet>
@@ -56,6 +58,7 @@ export default class Dashboard extends React.Component<DashboardProps> {
           </Toolbar>
         </AppBar>
         <Grid container spacing={24}>
+          <CalendarDatePicker/>
           {this.renderPlots(dataset)}
         </Grid>
       </div>

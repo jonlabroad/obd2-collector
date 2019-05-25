@@ -25,7 +25,7 @@ export class FieldDropdownContainer extends React.Component<FieldDropdownContain
         if (!this.props.datasets) {
             return [];
         }
-        var dataset: Dataset = Enumerable.from(this.props.datasets).firstOrDefault().value;
+        var dataset: Dataset = Enumerable.from(this.props.datasets.data).firstOrDefault().value;
         return Object.keys(dataset.data);
     }
 
@@ -38,10 +38,10 @@ export class FieldDropdownContainer extends React.Component<FieldDropdownContain
     }
     
     renderItems(): Array<JSX.Element> {
-        if (!this.props.datasets) {
+        if (!this.props.datasets || !this.props.datasets.data) {
             return [];
         }
-        return Enumerable.from(this.props.datasets["main"].data).select((dataset) => {
+        return Enumerable.from(this.props.datasets.data["main"].data).select((dataset) => {
             return (
                 <MenuItem value={dataset.key}>{dataset.key}</MenuItem>
             )

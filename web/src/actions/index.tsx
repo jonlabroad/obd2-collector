@@ -3,12 +3,14 @@ import Dataset from '../data/Dataset';
 
 export interface UpdateDataset {
     type: constants.UPDATE_DATASET;
+    calendarDate: string;
     dataset: Dataset;
 }
 export type UpdateDatasetAction = UpdateDataset;
-export function updateDataset(dataset: Dataset): UpdateDataset {
+export function updateDataset(calendarDate: string, dataset: Dataset): UpdateDataset {
     return {
         type: constants.UPDATE_DATASET,
+        calendarDate: calendarDate,
         dataset: dataset,
     }
 };
@@ -29,5 +31,18 @@ export function updatePlotSelection(plotKey: string, fieldSelection: string, plo
     }
 };
 
+export interface UpdateDate {
+    type: constants.UPDATE_DATE;
+    calendarDate: string;
+}
+export type UpdateDateAction = UpdateDate;
+export function updateDate(calendarDate: string): UpdateDate {
+    return {
+        type: constants.UPDATE_DATE,
+        calendarDate: calendarDate,
+    }
+};
+
 export type RootAction = UpdateDatasetAction |
-                         UpdatePlotSelectionAction
+                         UpdatePlotSelectionAction |
+                         UpdateDateAction

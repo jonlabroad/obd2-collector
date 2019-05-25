@@ -1,5 +1,6 @@
 import Dataset from "./Dataset";
 
 export default interface Datasets {
-    [key: string] : Dataset
+    data: {[key: string] : Dataset}
+    calendarDate: string;
 }

@@ -12,6 +12,7 @@ import Enumerable from "linq";
 
 export interface DashboardContainerProps {
     datasets: Datasets;
+    selectedCalendarDate: string;
     plots: DataPlot[];
 
     updateDataset: any;
@@ -25,14 +26,26 @@ export class DashboardContainer extends React.Component<DashboardContainerProps>
     async componentDidMount() {
         new Credentials().init();
         HighchartsTheme.applyTheme();
-    
-        new Obd2Reader().query("20190512").then((data: Dataset) => {
-            this.props.updateDataset(data);
-        });
+        this.updateData();
+    }
+
+    componentDidUpdate() {
+        this.updateData();
+    }
+
+    updateData() {
+        console.log(this.props);
+        if (this.props.selectedCalendarDate &&
+           (!this.props.datasets || this.props.selectedCalendarDate != this.props.datasets.calendarDate)) {
+                new Obd2Reader().query(this.props.selectedCalendarDate).then((data: Dataset) => {
+                    this.props.updateDataset(this.props.selectedCalendarDate, data);
+                });
+           }
     }
 
     render() {
-        console.log({dashboardContainerState: this.props.datasets});
+        //this.updateData();
+        console.log({dashboardContainerProps: this.props});
         return (
             <Dashboard
                 datasets={this.props.datasets}
@@ -45,12 +58,13 @@ export class DashboardContainer extends React.Component<DashboardContainerProps>
 export function mapStateToProps(state: PlotDashboardState) {
     return {
       datasets: state.datasets,
-      plots: state.plots
+      plots: state.plots,
+      selectedCalendarDate: state.calendarDate
     }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => ({
-    updateDataset: (dataset: Dataset) => dispatch(updateDataset(dataset)),
+    updateDataset: (calDate: string, dataset: Dataset) => dispatch(updateDataset(calDate, dataset)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
