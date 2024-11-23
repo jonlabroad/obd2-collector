@@ -15,6 +15,23 @@ def poll():
     allCommandsToPoll = commands.readCommandInfo()
     initializeLastPolled()
     connection = connect()
+    
+    while(not connection.is_connected()):
+        logging.warning("Waiting for connection...")
+        time.sleep(5)
+        connection = connect()
+    
+    # Write out the supported commands
+    # supported_commands is a list (supports add() and len())
+    supportedCommands = connection.supported_commands
+    commandsFilename = 'supported_commands.json'
+    with open(commandsFilename, 'w') as f:
+        f.write('[')
+        for cmd in supportedCommands:
+            f.write('"' + str(cmd) + '",')
+        f.write(']')
+        f.close()
+    
     while(True):
         if (connection.is_connected()):
             allData = {}
@@ -36,7 +53,7 @@ def poll():
         else:
             logging.warning("Connection failure... retrying")
             time.sleep(5)
-            connection = connect
+            connection = connect()
 
 def connect():
     connection = obdClient.connect()

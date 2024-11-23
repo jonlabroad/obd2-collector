@@ -22,7 +22,7 @@
     "typescript": "^3.4.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -47,6 +47,7 @@
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.8",
-    "@types/react-redux": "^7.0.9"
+    "@types/react-redux": "^7.0.9",
+    "cross-env": "^7.0.3"
   }
 }
